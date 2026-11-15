@@ -2,6 +2,14 @@
 test-results/
 **/test-results/
 
+# Maven build output
+target/
+**/target/
+
+# Node dependencies
+node_modules/
+**/node_modules/
+
 # Analyser outputs
 outputs/
 **/outputs/
