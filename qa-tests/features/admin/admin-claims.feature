@@ -4,8 +4,12 @@ Feature: Admin claims overview
   I want to see all submitted claims
   So that I can review them
 
+  # Each scenario creates its own claim: on a fresh database (e.g. in CI) the admin
+  # page shows "No claims found" and no table, so the scenarios can't rely on data
+  # left behind by other tests.
   Background:
-    Given I am logged in as "admin"
+    Given "claimant" has submitted a claim through the API
+    And I am logged in as "admin"
     And I am on the "Admin Claims" page
 
   @smoke
