@@ -173,11 +173,30 @@ cd code/bff-service && mvn test
 cd code/demo-app-ui && npm test
 ```
 
-### Run E2E tests (requires full stack running)
+### QA test suite (BDD end-to-end and API tests)
+
+The QA suite lives in [`qa-tests/`](qa-tests/README.md). It's written in JavaScript with Playwright and playwright-bdd: Gherkin feature files for the UI journeys (login, signup, submitting a claim, the admin claims list) and for the BFF API (401/403 access control, CSRF, login, and claimant-to-claimant data isolation). Scenarios for confirmed app bugs are tagged `@bug @fail`.
+
+The full stack must be running first (see Quick Start). On a fresh checkout, run `npm run generate:api` in `code/demo-app-ui` before `./start-app.sh`, otherwise the UI won't build (BUG-01 in the test strategy).
 
 ```bash
-cd code/demo-app-ui && npx playwright test
+cd qa-tests
+npm install
+npx playwright install chromium
+cp .env.example .env     # then fill in the test users and Keycloak admin credentials
+npm test                 # all scenarios
+npm run report           # open the HTML report
 ```
+
+See [`qa-tests/README.md`](qa-tests/README.md) for more options, such as running only the API tests or only `@smoke`.
+
+### Test strategy and findings
+
+[`docs/TEST_STRATEGY.md`](docs/TEST_STRATEGY.md) covers how I assessed the app, where I think the risk is, what I tested and what I left out, and every issue found so far (BUG-01 to BUG-08), with how each one was reproduced.
+
+### CI
+
+[`.github/workflows/e2e.yml`](.github/workflows/e2e.yml) runs the QA suite on GitHub Actions. It starts the whole Docker stack, runs `npm test` in `qa-tests`, and uploads the Playwright report. It's triggered manually from the Actions tab for now, and needs these repository secrets: `CLAIMANT_EMAIL`, `CLAIMANT_PASSWORD`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `OTHER_CLAIMANT_EMAIL`, `OTHER_CLAIMANT_PASSWORD`, `KEYCLOAK_ADMIN_USERNAME`, `KEYCLOAK_ADMIN_PASSWORD`.
 
 ---
 
