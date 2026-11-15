@@ -1,0 +1,20 @@
+{
+  "name": "qa-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BDD end-to-end and API tests for the claims app (Playwright + playwright-bdd)",
+  "type": "module",
+  "scripts": {
+    "bddgen": "bddgen",
+    "test": "bddgen && playwright test",
+    "test:headed": "bddgen && playwright test --headed",
+    "test:smoke": "bddgen && playwright test --grep @smoke",
+    "test:ui": "bddgen && playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "dotenv": "^18.0.10",
+    "playwright-bdd": "^9.2.1"
+  }
+}

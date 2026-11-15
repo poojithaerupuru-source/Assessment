@@ -1,0 +1,11 @@
+{
+  // Official "Cucumber" extension (cucumberopen.cucumber-official)
+  "cucumber.features": ["qa-tests/features/**/*.feature"],
+  "cucumber.glue": ["qa-tests/steps/**/*.js", "qa-tests/fixtures/**/*.js"],
+
+  // "Cucumber (Gherkin) Full Support" extension (alexkrechik.cucumberautocomplete)
+  "cucumberautocomplete.steps": ["qa-tests/steps/**/*.js"],
+  "cucumberautocomplete.syncfeatures": "qa-tests/features/**/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": true,
+  "cucumberautocomplete.smartSnippets": true
+}

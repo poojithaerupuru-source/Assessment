@@ -1,0 +1,5 @@
+{
+  "recommendations": ["cucumberopen.cucumber-official", "ms-playwright.playwright"],
+  // Two Cucumber extensions report undefined steps twice and can disagree.
+  "unwantedRecommendations": ["alexkrechik.cucumberautocomplete"]
+}
